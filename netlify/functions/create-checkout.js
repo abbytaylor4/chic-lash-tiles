@@ -117,7 +117,6 @@ exports.handler = async (event) => {
       ? "CHIC: Free local pickup in Salt Lake City, Utah."
      : subtotal > 30
   ? "CHIC: Free shipping on orders over $30."
-  : "CHIC: $7 flat-rate shipping."
   try {
     const response = await fetch(
       "https://connect.squareup.com/v2/online-checkout/payment-links",
