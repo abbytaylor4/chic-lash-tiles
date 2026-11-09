@@ -82,8 +82,7 @@ exports.handler = async (event) => {
 const subtotal = cart.items.reduce(
   (total, item) => total + item.quantity * 12, 0
 );
-  if (cart.delivery === "shipping") {
-    items.push({
+ if (cart.delivery === "shipping" && subtotal <= 30) 
       name: "Flat-rate shipping",
       quantity: "1",
       base_price_money: {
