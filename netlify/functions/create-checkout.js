@@ -79,10 +79,13 @@ exports.handler = async (event) => {
     });
   }
 
-const subtotal = cart.items.reduce(
-  (total, item) => total + item.quantity * 12, 0
-);
- if (cart.delivery === "shipping" && subtotal <= 30) 
+
+  const subtotal = cart.items.reduce(
+    (total, item) => total + item.quantity * 12, 0
+  );
+
+  if (cart.delivery === "shipping" && subtotal <= 30) {
+    items.push({
       name: "Flat-rate shipping",
       quantity: "1",
       base_price_money: {
@@ -101,6 +104,14 @@ const subtotal = cart.items.reduce(
     checkout_options: {
       ask_for_shipping_address: cart.delivery === "shipping",
       allow_tipping: false
+    },
+    payment_note: cart.delivery === "pickup"
+      ? "CHIC: Free local pickup in Salt Lake City, Utah."
+      : subtotal > 30
+        ? "CHIC: Free shipping on orders over $30."
+        : "CHIC: $7 flat-rate shipping."
+  };
+
     },
     payment_note: cart.delivery === "pickup"
       ? "CHIC: Free local pickup in Salt Lake City, Utah."
