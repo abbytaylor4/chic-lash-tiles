@@ -104,8 +104,9 @@ const subtotal = cart.items.reduce(
     },
     payment_note: cart.delivery === "pickup"
       ? "CHIC: Free local pickup in Salt Lake City, Utah."
-      : "CHIC: $7 flat-rate shipping."
-  };
+     : subtotal > 30
+  ? "CHIC: Free shipping on orders over $30."
+  : "CHIC: $7 flat-rate shipping." 
 
   try {
     const response = await fetch(
